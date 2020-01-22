@@ -2,11 +2,42 @@
     Layout = "~/_Layout.cshtml";
     Page.Title = string.Format("Razor - {0}", "Exercise 01");
     string customerName = Request.Form["customername"];
+    string choices = "";
 }
 
 @section banner {
     <h1>@Page.Title</h1>
 }
+
+@if (IsPost)
+{
+    choices = "";
+    var submitButton = Request.Form["submitbutton"];
+    choices = Request.Form["mealoption"];
+    if (submitButton.Equals("reset",StringComparison.OrdinalIgnoreCase))
+    {
+        choices = "";
+    }
+    else
+    {
+        if (choices.IsEmpty())
+        {
+            <p style="color:firebrick">You have not made a menu selection</p>
+        }
+        else
+        {
+            <p>@customerName, I see that you have the following menu items selected:</p>
+            <ul>
+                @foreach(var selection in choices.Split(','))
+                {
+                    <li>@selection</li>
+                }
+            </ul>
+        }
+    }
+}
+
+
 <form id="EX01" method="post">
     <div class="row">
         <div class="col-md-3">
@@ -21,7 +52,7 @@
         </div>
     </div>
     <div class="row">
-        <input type="submit" class="btn btn-primary" value="Submit" />
-        <input type="submit" class="btn btn-light" value="Reset" />
+        <input type="submit" id="submitbutton" name="submitbutton" class="btn btn-primary" value="submit" />
+        <input type="submit" id="submitbutton" name="submitbutton" class="btn btn-light" value="reset" />
     </div>
 </form>
