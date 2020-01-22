@@ -1,8 +1,26 @@
 ﻿@{
     Layout = "~/_Layout.cshtml";
     Page.Title = string.Format("Razor - {0}", "Exercise 01");
+    string customerName = Request.Form["customername"];
 }
 
 @section banner {
     <h1>@Page.Title</h1>
 }
+<form id="EX01" method="post">
+    <div class="row">
+        <div class="col-md-3">
+            <p>Customer Name: </p>
+            <input value="@customerName" name="customername" />
+        </div>
+        <div class="col-md-9">
+            <label>Choose your meal items</label><br />
+            <input type="checkbox" name="mealoption1" value="Steak" />Steak<br />
+            <input type="checkbox" name="mealoption2" value="Mashed Potato" />Mashed Potato<br />
+
+        </div>
+    </div>
+    <div class="row">
+
+    </div>
+</form>
